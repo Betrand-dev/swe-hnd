@@ -1,53 +1,54 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
-import { Platform } from 'react-native';
-
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+import {
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+  type Theme,
+} from "@react-navigation/native";
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
-    tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    background: "#f5f7fa",
+    surface: "#ffffff",
+    text: "#556872",
+    mutedText: "#a6b2bb",
+    tint: "#738b97",
+    border: "#d7dfe5",
+    tabInactive: "#b6c0c8",
+    cardShadow: "rgba(85, 104, 114, 0.08)",
+    drawerHeader: "#31c0d6",
+    drawerOverlay: "rgba(20, 31, 42, 0.22)",
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    background: "#0f1720",
+    surface: "#16212b",
+    text: "#dbe7ee",
+    mutedText: "#8b9aa5",
+    tint: "#9fb7c3",
+    border: "#22313d",
+    tabInactive: "#6f808c",
+    cardShadow: "rgba(0, 0, 0, 0.25)",
+    drawerHeader: "#178ca0",
+    drawerOverlay: "rgba(2, 6, 12, 0.5)",
   },
-};
+} as const;
 
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
-  },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
-  },
-  web: {
-    sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-    serif: "Georgia, 'Times New Roman', serif",
-    rounded: "'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif",
-    mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
-  },
-});
+export type ColorScheme = keyof typeof Colors;
+
+export function getNavigationTheme(colorScheme: ColorScheme | null | undefined): Theme {
+  const scheme = colorScheme === "dark" ? "dark" : "light";
+  const palette = Colors[scheme];
+  const baseTheme =
+    scheme === "dark" ? NavigationDarkTheme : NavigationDefaultTheme;
+
+  return {
+    ...baseTheme,
+    colors: {
+      ...baseTheme.colors,
+      background: palette.background,
+      card: palette.surface,
+      text: palette.text,
+      primary: palette.tint,
+      border: palette.border,
+      notification: palette.tint,
+    },
+  };
+}
