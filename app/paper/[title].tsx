@@ -4,18 +4,24 @@ import { useState } from "react";
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { PastPapers } from "@/data";
+
 import { useThemeColor } from "@/hooks/use-theme-color";
 
 const pdfThumbnail = require("@/assets/images/pdf.png");
 
-const pastPaperItems = [
-  { subject: "2023 Examination Paper", credit: "PDF file" },
-  { subject: "2022 Examination Paper", credit: "PDF file" },
-  { subject: "2021 Examination Paper", credit: "PDF file" },
-];
+// const pastPaperItems = [
+//   { subject: "2023 Examination Paper", credit: "PDF file" },
+//   { subject: "2022 Examination Paper", credit: "PDF file" },
+//   { subject: "2021 Examination Paper", credit: "PDF file" },
+// ];
+
+
 
 export default function PaperDetailScreen() {
-  const { title } = useLocalSearchParams<{ title?: string }>();
+  const { title, pastQuestions } = useLocalSearchParams<{ title?: string; pastQuestions?: string }>();
+  const pastPaperItems = PastPapers[pastQuestions ?? ""] || [];
+  const pastPaperItemsFiles = pastPaperItems.files;
   const insets = useSafeAreaInsets();
   const [activeTab, setActiveTab] = useState<"overview" | "past-papers">("overview");
   const backgroundColor = useThemeColor({}, "background");
@@ -23,7 +29,7 @@ export default function PaperDetailScreen() {
   const mutedTextColor = useThemeColor({}, "mutedText");
   const headerColor = useThemeColor({}, "drawerHeader");
   const rowBackground = useThemeColor(
-    { light: "#f3f6f8", dark: "#18242e" },
+    { light: "#eceef0", dark: "#18242e" },
     "surface",
   );
   const borderColor = useThemeColor(
@@ -105,30 +111,30 @@ export default function PaperDetailScreen() {
               },
             ]}
           >
-            <Ionicons name="document-text" size={42} color={textColor} />
+            <Ionicons name="document-text" size={30} color={textColor} />
             <Text style={[styles.downloadText, { color: textColor }]}>{rowText}</Text>
-            <Ionicons name="download" size={36} color={textColor} />
+            <Ionicons name="download" size={30} color={textColor} />
           </View>
         ) : (
           <>
-            {pastPaperItems.map((item) => (
+            {pastPaperItemsFiles.map((item) => (
               <View
-                key={item.subject}
+                key={item.id}
                 style={styles.paperResourceRow}
               >
                 <Image source={pdfThumbnail} style={styles.thumbnail} />
                 <View style={styles.paperResourceTextWrap}>
                   <Text
-                    numberOfLines={1}
+                    numberOfLines={2}
                     style={[styles.paperResourceTitle, { color: textColor }]}
                   >
-                    {item.subject}
+                    {item.name}
                   </Text>
                   <Text
                     numberOfLines={1}
                     style={[styles.paperResourceCredit, { color: mutedTextColor }]}
                   >
-                    {item.credit}
+                    {"PDF file"}
                   </Text>
                 </View>
               </View>
@@ -162,7 +168,6 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "800",
     textAlign: "center",
-    textTransform: "lowercase",
     marginHorizontal: 12,
   },
   switchRow: {

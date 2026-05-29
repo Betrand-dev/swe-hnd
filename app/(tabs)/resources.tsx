@@ -4,15 +4,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { AppHeader } from "@/components/app-header";
 import { useThemeColor } from "@/hooks/use-theme-color";
 
+import { ResourceMaterials } from "@/data";
+
 const pdfThumbnail = require("@/assets/images/pdf.png");
+const resources = ResourceMaterials.resources;
 
 const resourceItems = [
-  { subject: "Operating Systems", credit: "PDF file" },
-  { subject: "Network Security", credit: "PDF file" },
-  { subject: "Mobile Computing", credit: "PDF file" },
-  { subject: "Artificial Intelligence", credit: "PDF file" },
-  { subject: "Compiler Design", credit: "PDF file" },
-  { subject: "Computer Graphics", credit: "PDF file" },
+  { subject: "Operating Systems", fileType: "PDF file" },
+  { subject: "Network Security", fileType: "PDF file" },
+  { subject: "Mobile Computing", fileType: "PDF file" },
+  { subject: "Artificial Intelligence", fileType: "PDF file" },
+  { subject: "Compiler Design", fileType: "PDF file" },
+  { subject: "Computer Graphics", fileType: "PDF file" },
 ];
 
 export default function ResourcesScreen() {
@@ -31,15 +34,15 @@ export default function ResourcesScreen() {
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-        {resourceItems.map((item) => (
-          <View key={item.subject} style={styles.resourceRow}>
+        {resources.map((item) => (
+          <View key={item.id} style={styles.resourceRow}>
             <Image source={pdfThumbnail} style={styles.thumbnail} />
             <View style={styles.resourceTextWrap}>
-              <Text numberOfLines={1} style={[styles.subjectText, { color: textColor }]}>
-                {item.subject}
+              <Text numberOfLines={2} style={[styles.subjectText, { color: textColor }]}>
+                {item.name}
               </Text>
               <Text numberOfLines={1} style={[styles.creditText, { color: mutedTextColor }]}>
-                {item.credit}
+                {item.fileType}
               </Text>
             </View>
           </View>

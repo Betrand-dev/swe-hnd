@@ -6,36 +6,22 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { AppHeader } from "@/components/app-header";
 import { useThemeColor } from "@/hooks/use-theme-color";
 
-const papers = [
-  "Practice of Computer",
-  "Case Study",
-  "Digital Literacy",
-  "French",
-  "English",
-  "Enterprise Creation and Entrepreneurship",
-  "Law and Citizenship Education",
-  "Computer Technology",
-  "Discrete Mathematics",
-  "Information Systems",
-  "Digital Electronics",
-  "System Analysis and Design",
+const courses = [
+  { paper: "Practice of Computer", credit: "8", pastQuestions: "practice_of_computer" },
+  { paper: "Case Study", credit: "14" , pastQuestions: "case_study" },
+  { paper: "Digital Literacy", credit: "1", pastQuestions: "digital_literacy" },
+  { paper: "French", credit: "1", pastQuestions: "french" },
+  { paper: "English", credit: "1", pastQuestions: "english" },
+  { paper: "Enterprise Creation and Entrepreneurship", credit: "1", pastQuestions: "enterprise_creation" },
+  { paper: "Law and Citizenship Education", credit: "6", pastQuestions: "law_and_citizenship" },
+  { paper: "Computer Technology", credit: "4", pastQuestions: "computer_technology" },
+  { paper: "Discrete Mathematics", credit: "6", pastQuestions: "discrete_mathematics" },
+  { paper: "Information Systems", credit: "7", pastQuestions: "information_systems" },
+  { paper: "Digital Electronics", credit: "7",pastQuestions: "digital_electronic" },
+  { paper: "System Analysis and Design", credit: "7", pastQuestions: "system_analysis_and_design" },
 ];
 
-const credits = [
-  "8",
-  "14",
-  "1",
-  "1",
-  "1",
-  "1",
-  "6",
-  "4",
-  "6",
-  "7",
-  "7",
-];
-
-function PaperRow({ title, credit }: { title: string; credit: string }) {
+function PaperRow({ title, credit, pastQuestions }: { title: string; credit: string; pastQuestions: string }) {
   const iconColor = useThemeColor({}, "tint");
   const surfaceColor = useThemeColor({}, "surface");
   const mutedTextColor = useThemeColor({}, "mutedText");
@@ -44,7 +30,7 @@ function PaperRow({ title, credit }: { title: string; credit: string }) {
 
   return (
     <Pressable
-      onPress={() => router.push({ pathname: "/paper/[title]", params: { title } })}
+      onPress={() => router.push({ pathname: "/paper/[title]", params: { title, pastQuestions } })}
       style={styles.paperRow}
     >
       <View style={styles.paperIconWrap}>
@@ -53,8 +39,8 @@ function PaperRow({ title, credit }: { title: string; credit: string }) {
       <View style={styles.paperTextWrap}>
         <Text style={[styles.paperTitle, { color: textColor }]}>{title}</Text>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 3  }}>
-          <Text style={[styles.paperSubtitle, { color: mutedTextColor }]}>{`credit ${credit}`}</Text>
-          <Ionicons name="star" size={10} color={blueTest} />
+          <Text style={[styles.paperSubtitle, { color: mutedTextColor }]}>{`${credit} credit`}</Text>
+          
         </View>
       </View>
       <View
@@ -80,9 +66,9 @@ export default function PapersScreen() {
       <AppHeader />
       <ScrollView>
         <View style={styles.listWrap}>
-        {papers.map((paper, index) => (
-          <View key={paper} style={styles.paperSlot}>
-            <PaperRow title={paper} credit={credits[index % credits.length]} />
+        {courses.map((item) => (
+          <View key={item.paper} style={styles.paperSlot}>
+            <PaperRow title={item.paper} credit={item.credit} pastQuestions={item.pastQuestions} />
           </View>
         ))}
       </View>
