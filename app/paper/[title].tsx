@@ -1,7 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { PastPapers } from "@/data";
@@ -9,12 +9,6 @@ import { PastPapers } from "@/data";
 import { useThemeColor } from "@/hooks/use-theme-color";
 
 const pdfThumbnail = require("@/assets/images/pdf.png");
-
-// const pastPaperItems = [
-//   { subject: "2023 Examination Paper", credit: "PDF file" },
-//   { subject: "2022 Examination Paper", credit: "PDF file" },
-//   { subject: "2021 Examination Paper", credit: "PDF file" },
-// ];
 
 
 
@@ -118,7 +112,8 @@ export default function PaperDetailScreen() {
         ) : (
           <>
             {pastPaperItemsFiles.map((item) => (
-              <View
+              <TouchableOpacity
+              onPress= {() => router.push({pathname: "../viewer/[pdfScreen]", params: {name: item.name, file: item.file}})}
                 key={item.id}
                 style={styles.paperResourceRow}
               >
@@ -137,7 +132,7 @@ export default function PaperDetailScreen() {
                     {"PDF file"}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </>
         )}

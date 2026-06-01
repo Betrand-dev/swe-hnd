@@ -1,10 +1,11 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { AppHeader } from "@/components/app-header";
 import { useThemeColor } from "@/hooks/use-theme-color";
 
 import { ResourceMaterials } from "@/data";
+import { router } from "expo-router";
 
 const pdfThumbnail = require("@/assets/images/pdf.png");
 const resources = ResourceMaterials.resources;
@@ -35,7 +36,10 @@ export default function ResourcesScreen() {
         showsVerticalScrollIndicator={false}
       >
         {resources.map((item) => (
-          <View key={item.id} style={styles.resourceRow}>
+          <Pressable
+          onPress={()=> router.push({pathname: "../viewer/[pdfScreen]", params: {name: item.name, file: item.file}})}
+          key={item.id} 
+          style={styles.resourceRow}>
             <Image source={pdfThumbnail} style={styles.thumbnail} />
             <View style={styles.resourceTextWrap}>
               <Text numberOfLines={2} style={[styles.subjectText, { color: textColor }]}>
@@ -45,7 +49,7 @@ export default function ResourcesScreen() {
                 {item.fileType}
               </Text>
             </View>
-          </View>
+          </Pressable>
         ))}
       </ScrollView>
     </SafeAreaView>
