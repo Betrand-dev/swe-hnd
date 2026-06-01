@@ -7,6 +7,7 @@ import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 import { PastPapers } from "@/data";
 
 import { useThemeColor } from "@/hooks/use-theme-color";
+import  MarkdownViewer  from "@/components/app-markdown-display";
 
 const pdfThumbnail = require("@/assets/images/pdf.png");
 
@@ -16,6 +17,7 @@ export default function PaperDetailScreen() {
   const { title, pastQuestions } = useLocalSearchParams<{ title?: string; pastQuestions?: string }>();
   const pastPaperItems = PastPapers[pastQuestions ?? ""] || [];
   const pastPaperItemsFiles = pastPaperItems.files;
+  const overview = pastPaperItems.overview;
   const insets = useSafeAreaInsets();
   const [activeTab, setActiveTab] = useState<"overview" | "past-papers">("overview");
   const backgroundColor = useThemeColor({}, "background");
@@ -96,6 +98,7 @@ export default function PaperDetailScreen() {
         showsVerticalScrollIndicator={false}
       >
         {activeTab === "overview" ? (
+          <>
           <View
             style={[
               styles.downloadRow,
@@ -109,6 +112,12 @@ export default function PaperDetailScreen() {
             <Text style={[styles.downloadText, { color: textColor }]}>{rowText}</Text>
             <Ionicons name="download" size={30} color={textColor} />
           </View>
+          <MarkdownViewer
+            assetModule={overview} 
+            
+            
+            />
+          </>
         ) : (
           <>
             {pastPaperItemsFiles.map((item) => (

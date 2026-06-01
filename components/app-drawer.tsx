@@ -45,7 +45,7 @@ export function AppDrawer({ open, onClose }: AppDrawerProps) {
    {
     title: "More Resources",
     items: [
-      { icon: "text", label: "Past Question Answers", action: () => {} },
+      { icon: "text", label: "Past Question Answers", action: () => answers() },
       { icon: "compass", label: "HND Pamphlet", action: () => {} },
     ],
   },
@@ -125,12 +125,13 @@ export function AppDrawer({ open, onClose }: AppDrawerProps) {
         style={{
           borderWidth: 1,
           borderRadius: 8,
-          borderColor: "#8ef88a",
+          borderColor: overlayColor,
           padding: 8,
-          backgroundColor: overlayColor,
+          backgroundColor: "#d9f8c7",
           marginTop: 20,
          flexDirection: "row",
-         justifyContent: "center"
+         justifyContent: "center",
+         gap: 5,
         }}
         onPress={()=>{
           const message = "Hello. I will Like to Know More About the Answers to past question";
@@ -138,7 +139,7 @@ export function AppDrawer({ open, onClose }: AppDrawerProps) {
         }}
         > 
           <Ionicons name="logo-whatsapp" size={25} color={tintColor}/>
-          <Text style={{color: textColor, alignSelf: "center", fontSize: 15, fontWeight: "600"}}>Get Whatsapp</Text>
+          <Text style={{ alignSelf: "center", fontSize: 15, fontWeight: "600"}}>Get on Whatsapp</Text>
         </TouchableOpacity>
       </View>,
       ["40%"] // Custom small height
