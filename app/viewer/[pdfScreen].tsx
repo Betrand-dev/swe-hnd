@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import { useThemeColor } from "@/hooks/use-theme-color";
+import PdfViewer from "@/components/app-viewer";
 
 export default function pdfScreen()  {
     const { name, file } = useLocalSearchParams<{ name?: string; file?: string }>();
@@ -30,6 +31,7 @@ export default function pdfScreen()  {
             </View>
             <View>
                 {/* TODO: Dont forget Implemeting the pdf viewer display */}
+                <PdfViewer pdfSource={file} />
             </View>
         </SafeAreaView>
     );

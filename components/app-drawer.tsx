@@ -12,6 +12,7 @@ import {
   TextInput,
   useWindowDimensions,
   View,
+  Platform,
 } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -35,10 +36,26 @@ type AppDrawerProps = {
 };
 
 type SheetActionProps = {
-  icon: keyof typeof Ionicons.glyphMap;
+  icon?: keyof typeof Ionicons.glyphMap;
   label: string;
   onPress: () => void;
   tone?: "primary" | "whatsapp" | "mtn" | "orange" | "quiet";
+};
+
+
+const triggerUSSDCode = async (code: string) => {
+  let dialString = '';
+
+  if (Platform.OS === 'android') {
+    // Android requires strict URL encoding for the # character
+    const cleanCode = code.replace(/#/g, '#'); 
+    dialString = `tel:${encodeURIComponent(cleanCode)}`; // Converts #144# to tel:%23144%23
+  } else {
+    // iOS uses 'telprompt' to show a confirmation dialog first
+    dialString = `telprompt:${code}`;
+  }
+
+  Linking.openURL(dialString);
 };
 
 function SheetHeader({
@@ -110,15 +127,15 @@ function AboutSheetContent({ onClose }: { onClose: () => void }) {
     <View style={styles.sheetContent}>
       <SheetHeader
         icon="information-circle-outline"
-        title="About SWE - HND"
+        title="About SWE  HND"
         subtitle="Past papers, answers, and study resources for HND Software Engineering."
       />
       <Text style={[styles.sheetBodyText, { color: textColor }]}>
-        SWE-HND is a free offline study companion for HND Software Engineering
+        SWE HND is a free offline study companion for HND Software Engineering
         candidates in Cameroon. It brings together past papers, revision
         material, and useful resources to make exam preparation easier.
       </Text>
-      <SheetAction icon="close" label="Close" onPress={onClose} tone="quiet" />
+      <SheetAction label="Close" onPress={onClose} tone="quiet" />
     </View>
   );
 }
@@ -196,9 +213,8 @@ function DonateSheetContent({ onClose }: { onClose: () => void }) {
           <SheetAction
             icon="phone-portrait-outline"
             label="MTN MOMO"
-            onPress={() => {
-              void Linking.openURL(`tel:*126*14*650537134*${cleanAmount}#`);
-            }}
+            onPress={() => triggerUSSDCode(`tel:*126*9*650537134*${cleanAmount}#`)
+            }
             tone="mtn"
           />
         </View>
@@ -206,14 +222,12 @@ function DonateSheetContent({ onClose }: { onClose: () => void }) {
           <SheetAction
             icon="phone-portrait-outline"
             label="Orange"
-            onPress={() => {
-              void Linking.openURL(`tel:*126*14*650537134*${cleanAmount}#`);
-            }}
+            onPress={() =>triggerUSSDCode(`tel:#150*1*1*650537134*${cleanAmount}#`)}
             tone="orange"
           />
         </View>
       </View>
-      <SheetAction icon="close" label="Maybe later" onPress={onClose} tone="quiet" />
+      <SheetAction  label="Maybe later" onPress={onClose} tone="quiet" />
     </View>
   );
 }
@@ -387,7 +401,7 @@ export function AppDrawer({ open, onClose }: AppDrawerProps) {
   }
 
   const runDrawerAction = (action?: () => void) => {
-    onClose();
+    // onClose();
     setTimeout(action ?? openUnderDevelopment, 220);
   };
 
@@ -453,7 +467,6 @@ export function AppDrawer({ open, onClose }: AppDrawerProps) {
                       <Text style={[styles.itemLabel, { color: textColor }]}>
                         {item.label}
                       </Text>
-                      <Ionicons name="chevron-forward" size={18} color={mutedTextColor} />
                     </Pressable>
                   ))}
                 </View>
