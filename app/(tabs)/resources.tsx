@@ -10,15 +10,6 @@ import { router } from "expo-router";
 const pdfThumbnail = require("@/assets/images/pdf.png");
 const resources = ResourceMaterials.resources;
 
-const resourceItems = [
-  { subject: "Operating Systems", fileType: "PDF file" },
-  { subject: "Network Security", fileType: "PDF file" },
-  { subject: "Mobile Computing", fileType: "PDF file" },
-  { subject: "Artificial Intelligence", fileType: "PDF file" },
-  { subject: "Compiler Design", fileType: "PDF file" },
-  { subject: "Computer Graphics", fileType: "PDF file" },
-];
-
 export default function ResourcesScreen() {
   const backgroundColor = useThemeColor({}, "background");
   const textColor = useThemeColor({}, "text");
@@ -37,9 +28,19 @@ export default function ResourcesScreen() {
       >
         {resources.map((item) => (
           <Pressable
-          onPress={()=> router.push({pathname: "../viewer/[pdfScreen]", params: {name: item.name, file: item.file}})}
-          key={item.id} 
-          style={styles.resourceRow}>
+            onPress={() =>
+              router.push({
+                pathname: "/viewer/[pdfScreen]",
+                params: {
+                  pdfScreen: item.name,
+                  name: item.name,
+                  file: String(item.file),
+                },
+              })
+            }
+            key={item.id}
+            style={styles.resourceRow}
+          >
             <Image source={pdfThumbnail} style={styles.thumbnail} />
             <View style={styles.resourceTextWrap}>
               <Text numberOfLines={2} style={[styles.subjectText, { color: textColor }]}>

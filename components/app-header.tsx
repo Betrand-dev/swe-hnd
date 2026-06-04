@@ -16,7 +16,6 @@ export function AppHeader({ title = "SWE - HND" }: AppHeaderProps) {
   const { isDark, toggleTheme } = useAppTheme();
   const surfaceColor = useThemeColor({}, "surface");
   const textColor = useThemeColor({}, "text");
-  const tintColor = useThemeColor({}, "tint");
   const blueTest = useThemeColor({}, "drawerHeader");
 
   return (

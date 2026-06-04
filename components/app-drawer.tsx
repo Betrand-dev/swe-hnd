@@ -47,11 +47,8 @@ const triggerUSSDCode = async (code: string) => {
   let dialString = '';
 
   if (Platform.OS === 'android') {
-    // Android requires strict URL encoding for the # character
-    const cleanCode = code.replace(/#/g, '#'); 
-    dialString = `tel:${encodeURIComponent(cleanCode)}`; // Converts #144# to tel:%23144%23
+    dialString = `tel:${encodeURIComponent(code)}`;
   } else {
-    // iOS uses 'telprompt' to show a confirmation dialog first
     dialString = `telprompt:${code}`;
   }
 
@@ -213,8 +210,7 @@ function DonateSheetContent({ onClose }: { onClose: () => void }) {
           <SheetAction
             icon="phone-portrait-outline"
             label="MTN MOMO"
-            onPress={() => triggerUSSDCode(`tel:*126*9*650537134*${cleanAmount}#`)
-            }
+            onPress={() => triggerUSSDCode(`*126*9*650537134*${cleanAmount}#`)}
             tone="mtn"
           />
         </View>
@@ -222,7 +218,7 @@ function DonateSheetContent({ onClose }: { onClose: () => void }) {
           <SheetAction
             icon="phone-portrait-outline"
             label="Orange"
-            onPress={() =>triggerUSSDCode(`tel:#150*1*1*650537134*${cleanAmount}#`)}
+            onPress={() => triggerUSSDCode(`*150*1*1*650537134*${cleanAmount}#`)}
             tone="orange"
           />
         </View>

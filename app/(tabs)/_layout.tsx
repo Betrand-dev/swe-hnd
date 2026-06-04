@@ -9,7 +9,6 @@ import { AppDrawerProvider, useAppDrawer } from "@/hooks/use-app-drawer";
 function TabsNavigator() {
   const backgroundColor = useThemeColor({}, "background");
   const surfaceColor = useThemeColor({}, "surface");
-  const tintColor = useThemeColor({}, "tint");
   const blueTest = useThemeColor({}, "drawerHeader");
   const inactiveColor = useThemeColor({}, "tabInactive");
   const borderColor = useThemeColor({}, "border");

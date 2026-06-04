@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  View,
   StyleSheet,
   ViewStyle,
   StyleProp,
@@ -7,21 +8,28 @@ import {
 import { PdfView } from "@kishannareshpal/expo-pdf";
 
 interface PdfViewerProps {
-  pdfSource: any;
-  horizontal?: boolean
+  pdfSource: string;
+  horizontal?: boolean;
   style?: StyleProp<ViewStyle>;
 }
 
-export default function PdfViewer({ pdfSource, horizontal=false, style }: PdfViewerProps) {
-    return(
-        <PdfView 
-            uri={pdfSource}
-            horizontal={horizontal}
-            doubleTapToZoom={true}
-            pageGap={3}
-            style={[StyleSheet.absoluteFillObject,{flex: 1}, style]}
-        />
-    )
+export default function PdfViewer({ pdfSource, horizontal = false, style }: PdfViewerProps) {
+  return (
+    <View style={[styles.container, style]}>
+      <PdfView
+        uri={pdfSource}
+        horizontal={horizontal}
+        doubleTapToZoom
+        pageGap={2}
+        style={StyleSheet.absoluteFillObject}
+      />
+    </View>
+  );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 

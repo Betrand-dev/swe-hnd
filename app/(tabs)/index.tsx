@@ -26,7 +26,6 @@ function PaperRow({ title, credit, pastQuestions }: { title: string; credit: str
   const surfaceColor = useThemeColor({}, "surface");
   const mutedTextColor = useThemeColor({}, "mutedText");
   const textColor = useThemeColor({}, "text");
-  const blueTest = useThemeColor({}, "drawerHeader");
 
   return (
     <Pressable

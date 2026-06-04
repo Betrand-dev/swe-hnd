@@ -122,7 +122,16 @@ export default function PaperDetailScreen() {
           <>
             {pastPaperItemsFiles.map((item) => (
               <TouchableOpacity
-              onPress= {() => router.push({pathname: "../viewer/[pdfScreen]", params: {name: item.name, file: item.file}})}
+              onPress={() =>
+                router.push({
+                  pathname: "/viewer/[pdfScreen]",
+                  params: {
+                    pdfScreen: item.name,
+                    name: item.name,
+                    file: String(item.file),
+                  },
+                })
+              }
                 key={item.id}
                 style={styles.paperResourceRow}
               >
