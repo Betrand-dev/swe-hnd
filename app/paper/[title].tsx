@@ -34,9 +34,6 @@ export default function PaperDetailScreen() {
   );
 
   const displayTitle = Array.isArray(title) ? title[0] : title ?? "Paper";
-  const rowText =
-    activeTab === "overview" ? "download overview" : "download 2023 paper";
-
   return (
     <SafeAreaView
       edges={["left", "right", "bottom"]}
@@ -99,24 +96,7 @@ export default function PaperDetailScreen() {
       >
         {activeTab === "overview" ? (
           <>
-          <View
-            style={[
-              styles.downloadRow,
-              {
-                backgroundColor: rowBackground,
-                borderTopColor: borderColor,
-              },
-            ]}
-          >
-            <Ionicons name="document-text" size={30} color={textColor} />
-            <Text style={[styles.downloadText, { color: textColor }]}>{rowText}</Text>
-            <Ionicons name="download" size={30} color={textColor} />
-          </View>
-          <MarkdownViewer
-            assetModule={overview} 
-            
-            
-            />
+          <MarkdownViewer assetModule={overview} />
           </>
         ) : (
           <>
