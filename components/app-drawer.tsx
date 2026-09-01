@@ -218,7 +218,7 @@ function DonateSheetContent({ onClose }: { onClose: () => void }) {
           <SheetAction
             icon="phone-portrait-outline"
             label="Orange"
-            onPress={() => triggerUSSDCode(`*150*1*1*650537134*${cleanAmount}#`)}
+            onPress={() => triggerUSSDCode(`#150*1*1*692574863*${cleanAmount}#`)}
             tone="orange"
           />
         </View>
@@ -470,7 +470,7 @@ export function AppDrawer({ open, onClose }: AppDrawerProps) {
             </View>
 
             <View style={styles.footer}>
-              <Text style={[styles.versionText, { color: mutedTextColor }]}>V1.3.7</Text>
+              <Text style={[styles.versionText, { color: mutedTextColor }]}>V1.3.8</Text>
               <Text style={[styles.creditText, { color: mutedTextColor }]}>Betrand-dev</Text>
             </View>
           </ScrollView>

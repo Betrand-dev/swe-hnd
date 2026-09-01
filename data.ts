@@ -23,8 +23,10 @@ export const PastPapers: Record<string, PaperSubject> = {
     title: "practice of computer",
     overview: require("@/assets/past-questions/practice-of-computer/overview.md"),
     files: [
-      { id: 1, name: "Practice of Computer 2023", file: require("@/assets/past-questions/practice-of-computer/practice-of-computer-2023.pdf") },
-      { id: 2, name: "Practice of Computer 2021", file: require("@/assets/past-questions/practice-of-computer/practice-of-computer-2021.pdf") },
+      { id: 1, name: "Practice of Computer 2025", file: require("@/assets/past-questions/practice-of-computer/practice-of-computer-2025.pdf") },
+      { id: 2, name: "Practice of Computer 2023", file: require("@/assets/past-questions/practice-of-computer/practice-of-computer-2023.pdf") },
+      { id: 3, name: "Practice of Computer 2021", file: require("@/assets/past-questions/practice-of-computer/practice-of-computer-2021.pdf") },
+      { id: 4, name: "Practice of Computer 2020", file: require("@/assets/past-questions/practice-of-computer/practice-of-computer-2020.pdf") },
     ],
   },
 
