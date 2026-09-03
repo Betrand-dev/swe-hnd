@@ -157,11 +157,12 @@ export const PastPapers: Record<string, PaperSubject> = {
     title: "digital electronics",
     overview: require("@/assets/past-questions/digital-electronics/overview.md"),
     files: [
-      { id: 1, name: "Digital Electronics 2025", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2025.pdf") },
-      { id: 2, name: "Digital Electronics 2023", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2023.pdf") },
-      { id: 3, name: "Digital Electronics 2022", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2022.pdf") },
-      { id: 4, name: "Digital Electronics 2021", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2021.pdf") },
-      { id: 5, name: "Digital Electronics 2020", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2020.pdf") },
+      { id: 1, name: "Digital Electronics 2026", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2026.pdf") },
+      { id: 2, name: "Digital Electronics 2025", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2025.pdf") },
+      { id: 3, name: "Digital Electronics 2023", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2023.pdf") },
+      { id: 4, name: "Digital Electronics 2022", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2022.pdf") },
+      { id: 5, name: "Digital Electronics 2021", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2021.pdf") },
+      { id: 6, name: "Digital Electronics 2020", file: require("@/assets/past-questions/digital-electronics/digital-electronics-2020.pdf") },
     ],
   },
 
