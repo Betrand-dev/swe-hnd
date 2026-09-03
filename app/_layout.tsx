@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+import {SafeAreaProvider } from 'react-native-safe-area-context';
+
 import { AppLoadingSplash } from "@/components/app-loading-splash";
 import { getNavigationTheme } from "@/constants/theme";
 import { AppThemeProvider, useAppTheme } from "@/hooks/use-app-theme";
@@ -35,9 +37,11 @@ function RootLayoutContent() {
       <ThemeProvider value={navigationTheme}>
         <BottomSheetProvider>
           <View style={{ flex: 1 }}>
-            <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="(tabs)" />
-            </Stack>
+            <SafeAreaProvider>
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(tabs)" />
+                </Stack>
+              </SafeAreaProvider>
             <AppLoadingSplash visible={showLoadingSplash} />
           </View>
           <StatusBar

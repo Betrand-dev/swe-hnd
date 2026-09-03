@@ -296,7 +296,7 @@ export function AppDrawer({ open, onClose }: AppDrawerProps) {
   const shareApp = () => {
     void Share.share({
       message:
-        "Check out SWE-HND, an offline study app for HND Software Engineering past questions and resources.",
+        "Download APK on https://swehnd.netlify.app",
     });
   };
 
